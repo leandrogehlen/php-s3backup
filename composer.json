@@ -1,0 +1,11 @@
+{
+    "name": "leandrogehlen/s3backup",
+    "require": {
+        "aws/aws-sdk-php": "2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "S3Backup\\": "src/"
+        }
+    }
+}
