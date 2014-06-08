@@ -18,11 +18,11 @@ class S3Backup
         $this->_client->setRegion($region);
     }
 
-    public function clear($bucket, $dir, $days)
+    public function clear($bucket, $folder, $days)
     {
         $params = array('Bucket' => $bucket);
-        if ($dir) {
-            $params["Prefix"] = $dir;
+        if ($folder) {
+            $params["Prefix"] = $folder;
         }
 
         $objects = $this->_client->getIterator('ListObjects', $params);
@@ -41,13 +41,13 @@ class S3Backup
         }
     }
 
-    public function send($bucket, $dir, $file)
+    public function send($bucket, $folder, $file)
     {
         $filename = basename($file);
 
         return $this->_client->putObject(array(
             'Bucket' => $bucket,
-            'Key' => $dir . '/' . $filename,
+            'Key' => $folder . '/' . $filename,
             'SourceFile' => $file
         ));
         //echo $result['ObjectURL'] . "\n";

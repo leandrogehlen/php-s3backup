@@ -18,7 +18,7 @@ $params = getopt(null, array(
     "bucket:",
     "file:",
     "clear:",
-    "dir:"
+    "folder:"
 ));
 
 $backup = new S3Backup(
@@ -28,11 +28,11 @@ $backup = new S3Backup(
 );
 
 if (isset($params['clear']) && isset($params['bucket'])){
-    $backup->clear($params['bucket'], $params['dir'], $params['clear']);
+    $backup->clear($params['bucket'], $params['folder'], $params['clear']);
 }
 else if(isset($params['file']) && isset($params['bucket'])){
     try {
-        $result = $backup->send($params['bucket'], $params['dir'], $params['file']);
+        $result = $backup->send($params['bucket'], $params['folder'], $params['file']);
         echo $result['ObjectURL'];
     } catch (S3Exception $e) {
         echo $e->getMessage() . "\n";
