@@ -6,10 +6,8 @@ error_reporting(-1);
 
 require './vendor/autoload.php';
 
-use Aws\Common\Enum\Region;
-use S3Backup\S3Backup;
 use Aws\S3\Exception\S3Exception;
-
+use S3Backup\S3Backup;
 
 define('AWS_KEY', 'place access key here');
 define('AWS_SECRET_KEY', 'place secret key here');
@@ -18,13 +16,14 @@ $params = getopt(null, array(
     "bucket:",
     "file:",
     "clear:",
-    "folder:"
+    "folder:",
+    "region:"
 ));
 
 $backup = new S3Backup(
     AWS_KEY,
     AWS_SECRET_KEY,
-    Region::VIRGINIA
+    $params['region']
 );
 
 if (isset($params['clear']) && isset($params['bucket'])){
