@@ -4,7 +4,7 @@
 
 error_reporting(-1);
 
-require './vendor/autoload.php';
+require  __DIR__.'/vendor/autoload.php';
 
 use Aws\S3\Exception\S3Exception;
 use S3Backup\S3Backup;
