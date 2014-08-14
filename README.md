@@ -3,6 +3,11 @@ S3backup
 
 Script to send files to AmazonS3
 
+> It is necessary install php cURL extension
+
+> If you use linux distribution based on debian then: `sudo apt-get install php5-curl`
+
+
 ## Usage
 
 Send file
