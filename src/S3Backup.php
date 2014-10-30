@@ -8,14 +8,12 @@ class S3Backup
 {
     private $_client;
 
-    public function __construct($key, $secret, $region)
+    public function __construct($key, $secret)
     {
         $this->_client = S3Client::factory(array(
             'key' => $key,
             'secret' => $secret,
         ));
-
-        $this->_client->setRegion($region);
     }
 
     public function clear($bucket, $folder, $days)
@@ -43,14 +41,16 @@ class S3Backup
 
     public function send($bucket, $folder, $file)
     {
-        $filename = basename($file);
+        $key = basename($file);
+        if ($folder) {
+            $key = $folder . '/' . $key;
+        }
 
         return $this->_client->putObject(array(
             'Bucket' => $bucket,
-            'Key' => $folder . '/' . $filename,
+            'Key' => $key,
             'SourceFile' => $file
         ));
-        //echo $result['ObjectURL'] . "\n";
     }
 
 } 
