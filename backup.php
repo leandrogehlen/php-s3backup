@@ -9,9 +9,6 @@ require  __DIR__.'/vendor/autoload.php';
 use Aws\S3\Exception\S3Exception;
 use S3Backup\S3Backup;
 
-define('AWS_KEY', 'place access key here');
-define('AWS_SECRET_KEY', 'place secret key here');
-
 $params = getopt(null, array(
     "bucket:",
     "file:",
