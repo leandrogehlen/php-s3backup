@@ -10,6 +10,21 @@ Script to send files to AmazonS3
 
 ## Usage
 
+It's necessary to create configuration file, into base directory, named `config.php`.
+Example:
+
+```php
+
+<?php
+
+return [
+    'key' => 'place the access key here',
+    'secret' => 'place the secret key here',
+    'region' => 'place the region'
+];
+
+```
+
 Send file
 
 ```

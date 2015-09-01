@@ -4,18 +4,30 @@ namespace S3Backup;
 
 use Aws\S3\S3Client;
 
+/**
+ * Encapsulates methods to send and clean files from Amazon S3 service
+ * @author Leandro Gehlen <leandrogehlen@gmail.com>
+ */
 class S3Backup
 {
+    /** @var S3Client the Amazon S3 client instance */
     private $_client;
 
-    public function __construct($key, $secret)
+    /**
+     * Creates Amazon S3 client instance
+     * @param array|\Guzzle\Common\Collection $config Client configuration data
+     */
+    public function __construct($config)
     {
-        $this->_client = S3Client::factory(array(
-            'key' => $key,
-            'secret' => $secret,
-        ));
+        $this->_client = S3Client::factory($config);
     }
 
+    /**
+     * Remove files from Amazon S3
+     * @param string $bucket the bucket name
+     * @param string $folder the folder localization
+     * @param int $days number of days to keep files
+     */
     public function clear($bucket, $folder, $days)
     {
         $params = array('Bucket' => $bucket);
@@ -39,6 +51,13 @@ class S3Backup
         }
     }
 
+    /**
+     * Send files to Amazon S3
+     * @param string $bucket the bucket name
+     * @param string $folder the folder localization
+     * @param string $file the local file path
+     * @return \Guzzle\Service\Resource\Model
+     */
     public function send($bucket, $folder, $file)
     {
         $key = basename($file);
@@ -52,5 +71,4 @@ class S3Backup
             'SourceFile' => $file
         ));
     }
-
 } 

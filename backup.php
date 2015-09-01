@@ -19,10 +19,8 @@ $params = getopt(null, array(
     "folder:"
 ));
 
-$backup = new S3Backup(
-    AWS_KEY,
-    AWS_SECRET_KEY
-);
+$config = include './config.php';
+$backup = new S3Backup($config);
 
 $folder = isset($params['folder']) ? $params['folder'] : null;
 
