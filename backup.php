@@ -20,10 +20,10 @@ $folder = isset($params['folder']) ? $params['folder'] : null;
 $config = include __DIR__ . '/config.php';
 $backup = new S3Backup($config);
 
-if (isset($params['clear']) && isset($params['bucket'])){
+if (isset($params['clear'], $params['bucket'])){
     $backup->clear($params['bucket'], $folder, $params['clear']);
 }
-else if(isset($params['file']) && isset($params['bucket'])){
+else if(isset($params['file'], $params['bucket'])){
     try {
         $backup->send($params['bucket'], $folder, $params['file']);
     } catch (S3Exception $e) {
