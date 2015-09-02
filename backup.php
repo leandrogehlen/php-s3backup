@@ -16,18 +16,16 @@ $params = getopt(null, array(
     "folder:"
 ));
 
-$config = include './config.php';
-$backup = new S3Backup($config);
-
 $folder = isset($params['folder']) ? $params['folder'] : null;
+$config = include __DIR__ . '/config.php';
+$backup = new S3Backup($config);
 
 if (isset($params['clear']) && isset($params['bucket'])){
     $backup->clear($params['bucket'], $folder, $params['clear']);
 }
 else if(isset($params['file']) && isset($params['bucket'])){
     try {
-        $result = $backup->send($params['bucket'], $folder, $params['file']);
-        echo $result['ObjectURL'];
+        $backup->send($params['bucket'], $folder, $params['file']);
     } catch (S3Exception $e) {
         echo $e->getMessage() . "\n";
     }
