@@ -7,7 +7,7 @@ error_reporting(-1);
 require  __DIR__.'/vendor/autoload.php';
 
 use Aws\S3\Exception\S3Exception;
-use S3Backup\S3Backup;
+use leandrogehlen\S3Backup;
 
 $params = getopt(null, array(
     "bucket:",

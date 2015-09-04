@@ -1,6 +1,6 @@
 <?php
 
-namespace S3Backup;
+namespace leandrogehlen;
 
 use Aws\S3\S3Client;
 
