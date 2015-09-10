@@ -35,12 +35,11 @@ class S3Backup
             $params["Prefix"] = $folder;
         }
 
+        $base = strtotime(date("Y-m-d") . " -" . $days . " days");
         $objects = $this->_client->getIterator('ListObjects', $params);
 
         foreach ($objects as $obj) {
             $last = strtotime($obj['LastModified']);
-            $base = date("Y-m-d");
-            $base = strtotime(date("Y-m-d", strtotime($base)) . "-" . $days . " day");
 
             if (!$days || $last < $base) {
                 $this->_client->deleteObject(array(

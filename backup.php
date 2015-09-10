@@ -9,6 +9,8 @@ require  __DIR__.'/vendor/autoload.php';
 use Aws\S3\Exception\S3Exception;
 use leandrogehlen\S3Backup;
 
+date_default_timezone_set("UTC");
+
 $params = getopt(null, array(
     "bucket:",
     "file:",
